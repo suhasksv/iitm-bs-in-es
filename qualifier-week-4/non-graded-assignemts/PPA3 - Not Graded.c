@@ -3,7 +3,7 @@
 float piece_func(float x) {
     if (x > 0 && x < 10) {
         return x + 2;
-    } else if (x <= 10) {
+    } else if (x >= 10) {
         return x * x + 2;
     } else {
         return 0;
