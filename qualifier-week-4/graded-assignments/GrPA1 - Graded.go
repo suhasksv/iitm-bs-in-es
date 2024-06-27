@@ -1,4 +1,4 @@
-package graded_assignments
+package main
 
 import "fmt"
 
