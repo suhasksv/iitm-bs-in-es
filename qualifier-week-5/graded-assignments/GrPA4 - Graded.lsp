@@ -1,0 +1,31 @@
+(defun is-prime (n)
+  (cond ((<= n 1) nil)
+        ((= (remainder n 2) 0) nil)
+        (T (let ((loop (lambda (i)
+                       (if (> i (sqrt n))
+                         t
+                         (and (not (= (remainder n i) 0))
+                              (loop (+ i 1))))))
+             (loop 3)))))
+
+(defun prime-sum (p q)
+  (cond ((> p q) 0)
+        (T (let ((sum 0)
+                 (loop (lambda (i)
+                        (if (> i q)
+                          sum
+                          (let ((is-prime (is-prime i)))
+                            (if is-prime
+                              (loop (+ i 1) (+ sum i))
+                              (loop (+ i 1) sum))))))
+             (loop p)))))
+
+(print "Enter lower limit (positive integer): ")
+(let ((lower-limit (read)))
+  (print "Enter upper limit (positive integer, greater than or equal to lower limit): ")
+  (let ((upper-limit (read)))
+    (if (> lower-limit upper-limit)
+      (progn (print "Error! Lower limit must be less than or equal to upper limit.")
+             (exit))
+      (let ((result (prime-sum lower-limit upper-limit)))
+        (print (format nil "The sum of prime numbers between ~d and ~d is ~d" lower-limit upper-limit result))))))))
